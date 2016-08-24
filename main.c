@@ -1,13 +1,13 @@
+#include <errno.h>
+#include <fcntl.h>
 #include <netdb.h>
 #include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/epoll.h>
 #include <stdlib.h>
-#include <errno.h>
+#include <string.h>
+#include <sys/epoll.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #define MAXEVENTS 64
 
@@ -62,12 +62,14 @@ int main(int argc, char *argv[]) {
         int n, i;
         n = epoll_wait(efd, events, MAXEVENTS, -1);
         for (i = 0; i < n; i++) {
-            if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP) || (!(events[i].events & EPOLLIN))) {
+            if ((events[i].events & EPOLLERR) ||
+                (events[i].events & EPOLLHUP) ||
+                (!(events[i].events & EPOLLIN))) {
                 fprintf(stderr, "epoll error");
                 close(events[i].data.fd);
                 continue;
             }
-    
+
             if (sfd == events[i].data.fd) {
                 while (1) {
                     struct sockaddr in_addr;
@@ -85,9 +87,14 @@ int main(int argc, char *argv[]) {
                         break;
                     }
 
-                    s = getnameinfo(&in_addr, in_len, hbuf, sizeof hbuf, sbuf, sizeof sbuf, NI_NUMERICHOST | NI_NUMERICSERV);
+                    s = getnameinfo(&in_addr, in_len, hbuf, sizeof hbuf, sbuf,
+                                    sizeof sbuf,
+                                    NI_NUMERICHOST | NI_NUMERICSERV);
                     if (s == 0) {
-                        printf("Accepted connection on desc %d (host=%s, port=%s)\n", infd, hbuf, sbuf);
+                        printf(
+                            "Accepted connection on desc %d (host=%s, "
+                            "port=%s)\n",
+                            infd, hbuf, sbuf);
                     }
 
                     s = make_socket_non_block(infd);
@@ -185,13 +192,13 @@ int create_and_bind(char *port) {
 }
 
 int make_socket_non_block(int sfd) {
-    int flags,s;
+    int flags, s;
     flags = fcntl(sfd, F_GETFL, 0);
     if (flags == -1) {
         perror("fcntl");
         return -1;
     }
-    
+
     flags |= O_NONBLOCK;
     s = fcntl(sfd, F_SETFL, flags);
     if (s == -1) {

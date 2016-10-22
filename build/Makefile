@@ -48,24 +48,13 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /opt/users/didi/Code/c/c-misc
+CMAKE_SOURCE_DIR = /code/c/c-misc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /opt/users/didi/Code/c/c-misc
+CMAKE_BINARY_DIR = /code/c/c-misc/build
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -78,11 +67,22 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /opt/users/didi/Code/c/c-misc/CMakeFiles /opt/users/didi/Code/c/c-misc/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /code/c/c-misc/build/CMakeFiles /code/c/c-misc/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /opt/users/didi/Code/c/c-misc/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /code/c/c-misc/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,71 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named c_misc
+# Target rules for targets named test3
 
 # Build rule for target.
-c_misc: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 c_misc
-.PHONY : c_misc
+test3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test3
+.PHONY : test3
 
 # fast build rule for target.
-c_misc/fast:
-	$(MAKE) -f CMakeFiles/c_misc.dir/build.make CMakeFiles/c_misc.dir/build
-.PHONY : c_misc/fast
+test3/fast:
+	$(MAKE) -f CMakeFiles/test3.dir/build.make CMakeFiles/test3.dir/build
+.PHONY : test3/fast
 
-lib.o: lib.c.o
+inline/main.o: inline/main.c.o
 
-.PHONY : lib.o
-
-# target to build an object file
-lib.c.o:
-	$(MAKE) -f CMakeFiles/c_misc.dir/build.make CMakeFiles/c_misc.dir/lib.c.o
-.PHONY : lib.c.o
-
-lib.i: lib.c.i
-
-.PHONY : lib.i
-
-# target to preprocess a source file
-lib.c.i:
-	$(MAKE) -f CMakeFiles/c_misc.dir/build.make CMakeFiles/c_misc.dir/lib.c.i
-.PHONY : lib.c.i
-
-lib.s: lib.c.s
-
-.PHONY : lib.s
-
-# target to generate assembly for a file
-lib.c.s:
-	$(MAKE) -f CMakeFiles/c_misc.dir/build.make CMakeFiles/c_misc.dir/lib.c.s
-.PHONY : lib.c.s
-
-main.o: main.c.o
-
-.PHONY : main.o
+.PHONY : inline/main.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/c_misc.dir/build.make CMakeFiles/c_misc.dir/main.c.o
-.PHONY : main.c.o
+inline/main.c.o:
+	$(MAKE) -f CMakeFiles/test3.dir/build.make CMakeFiles/test3.dir/inline/main.c.o
+.PHONY : inline/main.c.o
 
-main.i: main.c.i
+inline/main.i: inline/main.c.i
 
-.PHONY : main.i
+.PHONY : inline/main.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/c_misc.dir/build.make CMakeFiles/c_misc.dir/main.c.i
-.PHONY : main.c.i
+inline/main.c.i:
+	$(MAKE) -f CMakeFiles/test3.dir/build.make CMakeFiles/test3.dir/inline/main.c.i
+.PHONY : inline/main.c.i
 
-main.s: main.c.s
+inline/main.s: inline/main.c.s
 
-.PHONY : main.s
+.PHONY : inline/main.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/c_misc.dir/build.make CMakeFiles/c_misc.dir/main.c.s
-.PHONY : main.c.s
+inline/main.c.s:
+	$(MAKE) -f CMakeFiles/test3.dir/build.make CMakeFiles/test3.dir/inline/main.c.s
+.PHONY : inline/main.c.s
+
+inline/target.o: inline/target.c.o
+
+.PHONY : inline/target.o
+
+# target to build an object file
+inline/target.c.o:
+	$(MAKE) -f CMakeFiles/test3.dir/build.make CMakeFiles/test3.dir/inline/target.c.o
+.PHONY : inline/target.c.o
+
+inline/target.i: inline/target.c.i
+
+.PHONY : inline/target.i
+
+# target to preprocess a source file
+inline/target.c.i:
+	$(MAKE) -f CMakeFiles/test3.dir/build.make CMakeFiles/test3.dir/inline/target.c.i
+.PHONY : inline/target.c.i
+
+inline/target.s: inline/target.c.s
+
+.PHONY : inline/target.s
+
+# target to generate assembly for a file
+inline/target.c.s:
+	$(MAKE) -f CMakeFiles/test3.dir/build.make CMakeFiles/test3.dir/inline/target.c.s
+.PHONY : inline/target.c.s
 
 # Help Target
 help:
@@ -183,15 +183,15 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... c_misc"
-	@echo "... lib.o"
-	@echo "... lib.i"
-	@echo "... lib.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... edit_cache"
+	@echo "... test3"
+	@echo "... inline/main.o"
+	@echo "... inline/main.i"
+	@echo "... inline/main.s"
+	@echo "... inline/target.o"
+	@echo "... inline/target.i"
+	@echo "... inline/target.s"
 .PHONY : help
 
 
